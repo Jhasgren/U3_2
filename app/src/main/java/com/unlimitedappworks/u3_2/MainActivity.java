@@ -32,14 +32,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void intentar(View view) {
-        if (Integer.valueOf(edt_num.getText().toString()) == numero) {
+        int n = Integer.valueOf(edt_num.getText().toString());
+        if (n == numero) {
             Toast.makeText(this, "Felicidades adivinaste el numero", Toast.LENGTH_LONG).show();
             puntos++;
             sh.edit().putInt("puntos", puntos + 1).commit();
             numero = rnd.nextInt(49) + 1;
             tv_puntos.setText("Puntaje: " + puntos);
         } else {
-            Toast.makeText(this, "Numero equivocado", Toast.LENGTH_LONG).show();
+            if (n < numero) {
+                Toast.makeText(this, "El numero es mayor al ingresado", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "El numero es menor al ingresado", Toast.LENGTH_LONG).show();
+            }
         }
         edt_num.setText("");
     }
